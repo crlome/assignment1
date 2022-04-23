@@ -1,0 +1,35 @@
+{
+	"62643b9ace974d7b6e6acfdc": {
+		"customer": {
+			"id": "62643b9ace974d7b6e6acfdc",
+			"name": "Angelique Roberts"
+		},
+		"months": {
+			"1-2022": 120,
+			"2-2022": 240,
+			"3-2022": 500
+		}
+	},
+	"62643b9a1cceeef78c71f285": {
+		"customer": {
+			"id": "62643b9a1cceeef78c71f285",
+			"name": "Amalia Carson"
+		},
+		"months": {
+			"1-2022": 320,
+			"2-2022": 280,
+			"3-2022": 180
+		}
+	},
+	"62643b9ab5f03537027540e8": {
+		"customer": {
+			"id": "62643b9ab5f03537027540e8",
+			"name": "Tamra Kane"
+		},
+		"months": {
+			"1-2022": 150,
+			"2-2022": 90,
+			"3-2022": 300
+		}
+	}
+}
