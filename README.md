@@ -1,3 +1,9 @@
+# Version
+
+- Node: 16.9.1
+- React: 18.0.0
+- Vite: 2.9.5
+
 # Run
 
 1. yarn
