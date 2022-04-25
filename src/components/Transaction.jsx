@@ -73,6 +73,7 @@ function Transaction({ customer_history, setCustomerHistory, customers }) {
 			<p>
 				Customer:
 				<select value={selected_customer?.id} onChange={onChangeCustomer} placeholder="Select a customer...">
+					<option value={undefined}>Select a customer...</option>
 					{
 						customers.map(customer => <option key={customer.id} value={customer.id}>{customer.name}</option>)
 					}
