@@ -7,13 +7,15 @@
 # Run
 
 1. yarn
-1. yarn dev
-1. visit: `http://localhost:3000/`
+2. yarn dev
+3. visit: `http://localhost:3000/`
 
 # Test
 
 1. yarn
 2. yarn test
+3. ![image](https://user-images.githubusercontent.com/23087522/165009608-a80e0244-685e-4aa0-aed2-899844ec38f4.png)
+4. Press `a`
 
 # Description
 
