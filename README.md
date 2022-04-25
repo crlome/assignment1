@@ -1,6 +1,7 @@
 # Version
 
 - Node: 16.9.1
+- Yarn: 1.22.15
 - React: 18.0.0
 - Vite: 2.9.5
 
