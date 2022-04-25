@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const RewardsActions = ({ customer_history }) => {
+function Rewards({ customer_history }) {
 	const [rewards, setRewards] = useState([]);
 	
 	const onClickCalculateRewards = () => {
@@ -10,6 +10,7 @@ export const RewardsActions = ({ customer_history }) => {
 			const history = customer_history[customer];
 
 			const reward = {
+				customer_id: history.customer.id,
 				customer: history.customer.name,
 				months: [],
 			};
@@ -36,16 +37,6 @@ export const RewardsActions = ({ customer_history }) => {
 		setRewards(new_rewards);
 	}
 
-	return {
-		/* state */
-		rewards,
-		setRewards,
-		/* actions */
-		onClickCalculateRewards,
-	}
-}
-
-export const RewardsUI = ({ rewards, onClickCalculateRewards }) => {
 	return (
 		<>
 			<br /><br />
@@ -55,7 +46,7 @@ export const RewardsUI = ({ rewards, onClickCalculateRewards }) => {
 
 			{
 				rewards.map((reward, id_reward) => 
-					<table key={id_reward}>
+					<table key={id_reward} role={`table:${reward.customer_id}`}>
 						<thead>
 							<tr>
 								<th colSpan="2">Customer: {reward.customer}</th>
@@ -68,7 +59,7 @@ export const RewardsUI = ({ rewards, onClickCalculateRewards }) => {
 						<tbody>
 							{
 								reward.months.map((month, id_month) => 
-									<tr key={id_month}>
+									<tr key={`${id_reward}-${id_month}`}>
 										<td>{month.month}</td>
 										<td>{month.total}</td>
 									</tr>
@@ -80,12 +71,6 @@ export const RewardsUI = ({ rewards, onClickCalculateRewards }) => {
 			}
 		</>
 	)
-}
-
-function Rewards({ customer_history }) {
-	const { rewards, onClickCalculateRewards } = RewardsActions({ customer_history });
-
-	return <RewardsUI rewards={rewards} onClickCalculateRewards={onClickCalculateRewards} />
 }
 
 export default Rewards

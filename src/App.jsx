@@ -7,7 +7,7 @@ const api = {
 	transactions: 'http://localhost:3000/src/api/transactions.json',
 }
 
-export const AppActions = () => {
+function App() {
 	const [customer_history, setCustomerHistory] = useState({});
 	const [customers, setCustomers] = useState([]);
 
@@ -27,20 +27,6 @@ export const AppActions = () => {
 			throw ex;
 		}
 	}
-
-	return {
-		/* state */
-		customer_history,
-		setCustomerHistory,
-		customers,
-		setCustomers,
-		/* actions */
-		getPayloadFromApi
-	}
-}
-
-function App() {
-	const { customer_history, setCustomerHistory, customers, setCustomers, getPayloadFromApi } = AppActions();
 
 	useEffect(() => {
 		(async () => {

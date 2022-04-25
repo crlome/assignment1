@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export const TransactionActions = ({ customer_history, setCustomerHistory, customers }) => {
+function Transaction({ customer_history, setCustomerHistory, customers }) {
 	const [selected_customer, setSelectedCustomer] = useState({});
 	const [total, setTotal] = useState(0);
-	
+	const [message, setMessage] = useState('');
+
 	const onChangeTotal = (e) => {
 		const new_total = parseFloat(e.target.value);
 		
@@ -13,6 +14,10 @@ export const TransactionActions = ({ customer_history, setCustomerHistory, custo
 		else {
 			setTotal(0);
 		}
+	}
+
+	const onFocustotal = () => {
+		setMessage('');
 	}
 	
 	const onChangeCustomer = (e) => {
@@ -32,12 +37,12 @@ export const TransactionActions = ({ customer_history, setCustomerHistory, custo
 
 	const onClickCompleteTransaction = () => {
 		if(!selected_customer?.id) {
-			alert('You have to select a customer');
+			setMessage('Error: You have to select a customer');
 			return
 		}
 		
 		if(total <= 0) {
-			alert('The Total $ must be greater than 0');
+			setMessage('Error: The Total $ must be greater than 0');
 			return
 		}
 		
@@ -60,29 +65,14 @@ export const TransactionActions = ({ customer_history, setCustomerHistory, custo
 		
 		setCustomerHistory(new_customer_history);
 		setTotal(0);
-		alert('Transaction saved')
+		setMessage('Transaction saved')
 	}
-
-	return {
-		/* state */
-		selected_customer,
-		setSelectedCustomer,
-		total,
-		setTotal,
-		/* actions */
-		onChangeTotal,
-		onChangeCustomer,
-		onClickCompleteTransaction,
-	}
-}
-
-export const TransactionUI = ({ onChangeTotal, onChangeCustomer, onClickCompleteTransaction, selected_customer, total, customers }) => {
+	
 	return (
 		<>
 			<p>
 				Customer:
-				<select value={selected_customer?.id} onChange={onChangeCustomer}>
-					<option value={undefined}>Select a customer...</option>
+				<select value={selected_customer?.id} onChange={onChangeCustomer} placeholder="Select a customer...">
 					{
 						customers.map(customer => <option key={customer.id} value={customer.id}>{customer.name}</option>)
 					}
@@ -91,28 +81,24 @@ export const TransactionUI = ({ onChangeTotal, onChangeCustomer, onClickComplete
 			
 			<label>
 				Total $:
-				<input type="number" value={total} onChange={onChangeTotal} />
+				<input type="number" value={total} placeholder="Total" onChange={onChangeTotal} onFocus={onFocustotal} />
 			</label>
 			
 			<br /><br />
 			<button onClick={onClickCompleteTransaction}>
 				Save Transaction
 			</button>
+
+			<br /><br />
+			{
+				(message || '').length > 0
+				?
+				<strong className='error'>{message}</strong>
+				:
+				null
+			}
 		</>
 	)
-}
-
-function Transaction({ customer_history, setCustomerHistory, customers }) {
-	const { onChangeTotal, onChangeCustomer, onClickCompleteTransaction, selected_customer, total } = TransactionActions({ customer_history, setCustomerHistory, customers });
-	
-	return <TransactionUI
-		onChangeTotal={onChangeTotal}
-		onChangeCustomer={onChangeCustomer}
-		onClickCompleteTransaction={onClickCompleteTransaction}
-		selected_customer={selected_customer}
-		total={total}
-		customers={customers}
-	/>
 }
 
 export default Transaction
